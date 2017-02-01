@@ -42,6 +42,8 @@ class design(object):
         self.order = order
         self.ITI = ITI
         self.onsets = onsets
+        self.Fe = 0
+        self.Fd = 0
 
         self.experiment = experiment
 
@@ -306,8 +308,11 @@ class design(object):
         :param weights: Weights given to each of the efficiency metrics in this order: Estimation, Detection, Frequencies, Confounders.
         :type weights: list of floats
         '''
-        self.FeCalc()
-        self.FdCalc()
+
+        if weights[0]>0:
+            self.FeCalc()
+        if weights[1]>0:
+            self.FdCalc()
         self.FfCalc()
         self.FcCalc()
         matr = np.array([self.Fe, self.Fd, self.Ff, self.Fc])
