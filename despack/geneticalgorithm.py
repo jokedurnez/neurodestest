@@ -869,7 +869,7 @@ class population(object):
 
         if self.weights[1] > 0:
             self.clear()
-            self.add_new_designs(weights=[1, 0, 0, 0])
+            self.add_new_designs(weights=[0, 1, 0, 0])
             # loop
             bar = progressbar.ProgressBar()
             for generation in bar(range(self.preruncycles)):
