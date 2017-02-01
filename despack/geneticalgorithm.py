@@ -309,7 +309,7 @@ class design(object):
         self.Ff = 1 - self.Ff / self.experiment.FfMax
         return self
 
-    def FCalc(self, weights):
+    def FCalc(self, weights,Aoptimality=True,confoundorder=3):
         '''
         Compute weighted average of efficiencies.
 
@@ -318,11 +318,11 @@ class design(object):
         '''
 
         if weights[0]>0:
-            self.FeCalc()
+            self.FeCalc(Aoptimality)
         if weights[1]>0:
-            self.FdCalc()
+            self.FdCalc(Aoptimality)
         self.FfCalc()
-        self.FcCalc()
+        self.FcCalc(confoundorder)
         matr = np.array([self.Fe, self.Fd, self.Ff, self.Fc])
         self.F = np.sum(weights * matr)
         return self
@@ -652,15 +652,7 @@ class population(object):
 
         # develop
         design.designmatrix()
-        
-        # if weights[0] > 0:
-        #     design.FeCalc(Aoptimality=self.Aoptimality)
-        # if weights[1] > 0:
-        #     design.FdCalc(Aoptimality=self.Aoptimality)
-        design.FcCalc(self.exp.confoundorder)
-        design.FfCalc()
-
-        design.FCalc(weights)
+        design.FCalc(weights,confoundorder=self.exp.confoundorder,Aoptimality=self.Aoptimality)
         if np.isnan(design.F):
             return False
 

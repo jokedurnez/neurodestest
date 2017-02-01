@@ -1,7 +1,7 @@
 #!/bin/bash
-#SBATCH --job-name=14code
-#SBATCH --output=14code.out
-#SBATCH --error=14code.err
+#SBATCH --job-name=3
+#SBATCH --output=3.out
+#SBATCH --error=3.err
 #SBATCH --time=30:00:00
 #SBATCH --mem=64GB
 #SBATCH --qos=russpold
