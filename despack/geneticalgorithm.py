@@ -234,7 +234,11 @@ class design(object):
         try:
             invM = scipy.linalg.inv(self.X)
         except scipy.linalg.LinAlgError:
-            invM = scipy.linalg.pinv(self.X)
+            try:
+                invM = scipy.linalg.pinv(self.X)
+            except numpy.linalg.linalg.LinAlgError:
+                invM = np.nan
+        sys.exc_clear()
         invM = np.array(invM)
         st1 = np.dot(self.CX, invM)
         CMC = np.dot(st1, t(self.CX))
@@ -255,7 +259,11 @@ class design(object):
         try:
             invM = scipy.linalg.inv(self.Z)
         except scipy.linalg.LinAlgError:
-            invM = scipy.linalg.pinv(self.Z)
+            try:
+                invM = scipy.linalg.pinv(self.Z)
+            except numpy.linalg.linalg.LinAlgError:
+                invM = np.nan
+        sys.exc_clear()
         invM = np.array(invM)
         CMC = np.matrix(self.C) * invM * np.matrix(t(self.C))
         if Aoptimality == True:
@@ -644,14 +652,17 @@ class population(object):
 
         # develop
         design.designmatrix()
-        if weights[0] > 0:
-            design.FeCalc(Aoptimality=self.Aoptimality)
-        if weights[1] > 0:
-            design.FdCalc(Aoptimality=self.Aoptimality)
+        
+        # if weights[0] > 0:
+        #     design.FeCalc(Aoptimality=self.Aoptimality)
+        # if weights[1] > 0:
+        #     design.FdCalc(Aoptimality=self.Aoptimality)
         design.FcCalc(self.exp.confoundorder)
         design.FfCalc()
 
         design.FCalc(weights)
+        if np.isnan(design.F):
+            return False
 
         return design
 
