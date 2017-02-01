@@ -1,7 +1,7 @@
 #!/bin/bash
-#SBATCH --job-name=4
-#SBATCH --output=4.out
-#SBATCH --error=4.err
+#SBATCH --job-name=7
+#SBATCH --output=7.out
+#SBATCH --error=7.err
 #SBATCH --time=30:00:00
 #SBATCH --mem=64GB
 #SBATCH --qos=russpold

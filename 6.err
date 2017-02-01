@@ -1,0 +1,15 @@
+Traceback (most recent call last):
+  File "test.py", line 44, in <module>
+    POP.naturalselection()
+  File "/home/jdurnez/SVDerrorCheck/despack/geneticalgorithm.py", line 875, in naturalselection
+    self.add_new_designs(weights=[0, 1, 0, 0])
+  File "/home/jdurnez/SVDerrorCheck/despack/geneticalgorithm.py", line 703, in add_new_designs
+    fulldes = self.check_develop(des, weights)
+  File "/home/jdurnez/SVDerrorCheck/despack/geneticalgorithm.py", line 658, in check_develop
+    design.FCalc(weights,confoundorder=self.exp.confoundorder,Aoptimality=self.Aoptimality)
+  File "/home/jdurnez/SVDerrorCheck/despack/geneticalgorithm.py", line 326, in FCalc
+    self.FdCalc(Aoptimality)
+  File "/home/jdurnez/SVDerrorCheck/despack/geneticalgorithm.py", line 261, in FdCalc
+    pickle.dump(DES,open("/home/jdurnez/SVDerrorCheck/design.p","rb"))
+IOError: [Errno 2] No such file or directory: '/home/jdurnez/SVDerrorCheck/design.p'
+srun: error: sh-1-19: task 0: Exited with exit code 1

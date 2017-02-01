@@ -21,6 +21,7 @@ import copy
 import sklearn.cluster
 import time
 import progressbar
+import pickle
 
 
 class design(object):
@@ -256,6 +257,8 @@ class design(object):
         :param Aoptimality: Kind of optimality to optimize: A- or D-optimality
         :type Aoptimality: boolean
         '''
+        DES = {"order":self.order,"ITI":self.ITI}
+        pickle.dump(DES,open("/home/jdurnez/SVDerrorCheck/design.p","wb"))
         try:
             invM = scipy.linalg.inv(self.Z)
         except scipy.linalg.LinAlgError:
